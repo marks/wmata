@@ -26,12 +26,19 @@ module WMATA
         
       # NOTE: We memoize this since (a) there's no way to ask for just one line and
       # (b) they're unlikely to change while we're doing a request.
-      def get_all(params)
+      def get_all(params = {})
         @lines ||= get_all_without_memoize(params)
       end
       
       def symbol_to_line_code(symbol)
         SYMBOL_TO_LINES_MAP[symbol]
+      end
+      
+      # Get a specific line, identified by line code (e.g., "RD") or a +Symbol+
+      # string name (e.g., +:red+).
+      def get(code)
+        code = Line.symbol_to_line_code(code) if code.is_a?(Symbol)
+        get_all.select {|l| l.code == code}.pop
       end
     end
     
@@ -66,13 +73,6 @@ module WMATA
     end
     
     alias_method :stations, :route
-    
-    # Get a specific line, identified by line code (e.g., "RD") or a +Symbol+
-    # string name (e.g., +:red+).
-    def get(code)
-      code = Line.symbol_to_line_code(code) if code.is_a?(Symbol)
-      get_all.select {|l| l.code == code}.pop
-    end
     
     # Returns the line's code (also available as +line_code+).
     def code
