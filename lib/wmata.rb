@@ -28,7 +28,7 @@ module WMATA
     # Get all rail lines.
     #
     #    WMATA.lines.map {|l| l.code}
-    #    # => ["RD", "BL", "GR", "OR", "YE"]
+    #    # => ["RD", "BL", "GR", "OR", "YL"]
     #
     def lines
       Line.get_all
