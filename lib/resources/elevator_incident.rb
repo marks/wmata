@@ -46,5 +46,14 @@ module WMATA
     def date_updated
       Time.parse(@attrs['DateUpdated'])
     end
+
+    def status_string
+      case unit_status
+      when "O"
+        "Out of service"
+      when "C"
+        "Operational"
+      end
+    end
   end
 end

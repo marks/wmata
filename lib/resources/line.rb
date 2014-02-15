@@ -18,7 +18,7 @@ module WMATA
       :blue => "BL",
       :orange => "OR", 
       :green => "GR", 
-      :yellow => "YE"
+      :yellow => "YL"
     }
     
     class <<self
